@@ -1,0 +1,39 @@
+<h2><%= customer.last_name %><%= customer.first_name %>さんの会員情報</h2>
+
+<div>
+  <li>会員ID</li>
+  <li><%= customer.id %></li>
+</div>
+<div>
+  <li>氏名</li>
+  <li><%= customer.last_name %><%= customer.first_name %></li>
+</div>
+<div>
+  <li>フリガナ</li>
+  <li><%= customer.last_name_kana %><%= customer.first_name_kana %></li>
+</div>
+<div>
+  <li>郵便番号</li>
+  <li><%= customer.postal_code %></li>
+</div>
+<div>
+  <li>住所</li>
+  <li><%= customer.address %></li>
+</div>
+<div>
+  <li>電話番号</li>
+  <li><%= customer.telephone_number %></li>
+</div>
+<div>
+  <li>メールアドレス</li>
+  <li><%= customer.email %></li>
+</div>
+<div>
+  <li>会員ステータス</li>
+  <% if customer.is_active %>
+      <li>有効</li>
+    <% else %>
+      <li>退会</li>
+    <% end %>
+  <% end %>
+</div>

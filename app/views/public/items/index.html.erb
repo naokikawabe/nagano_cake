@@ -1,0 +1,9 @@
+<h2>商品一覧</h2>
+
+<div class="item-list">
+  <% @items.each do |item| %>
+      <div><%= attachment_image_tag item, :image %></div>
+      <div><%= item.name %></div>
+      <div>¥<%= item.price %></div>
+  <% end %>
+</div>
