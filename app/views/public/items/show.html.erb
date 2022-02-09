@@ -1,2 +1,28 @@
-<h1>Public::Items#show</h1>
-<p>Find me in app/views/public/items/show.html.erb</p>
+
+<div>
+  <%= attachment_image_tag @item, :image %>
+</div>
+
+<div>
+    <li>商品名</li>
+    <%= @item.name %>
+</div>
+<div>
+    <li>商品説明</li>
+    <%= @item.introduction %>
+</div>
+<div>
+    <li>販売価格</li>
+    <%= @item.price %>
+</div>
+
+<%= form_with model: @cart_item, url: public_cart_items, local:true do |f| %>
+
+  <div>
+    <%= hidden_field :name, @item.name %>
+    <%= hidden_field :price, @item.price %>
+
+    <%= f.select :amount, [['1']['2']['3']['4']['5']['6']['7']['8']['9']['10']] %>
+  </div>
+
+<% end %>
