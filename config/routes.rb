@@ -4,7 +4,6 @@ Rails.application.routes.draw do
     resources :orders
     resources :cart_items
     resources :customers
-    resources :registrations
     resources :items
   end
 
