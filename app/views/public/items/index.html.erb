@@ -3,7 +3,7 @@
 <div class="item-list">
   <% @items.each do |item| %>
       <div><%= attachment_image_tag item, :image %></div>
-      <div><%= item.name %></div>
+      <div><%= link_to item.name, public_item_path(item.id) %></div>
       <div>¥<%= item.price %></div>
   <% end %>
 </div>
