@@ -28,8 +28,16 @@
                     Log out
                   <% end %>
                 </li>
-                <li>商品一覧</li>
-                <li>カート</li>
+                <li>
+                  <%= link_to public_items_path do %>
+                    商品一覧
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to public_cart_items_path do %>
+                    カート
+                  <% end %>
+                  </li>
                 <li>
                   <%= link_to destroy_customer_session_path, method: :delete do %>
                     ログアウト

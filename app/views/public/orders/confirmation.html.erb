@@ -1,0 +1,56 @@
+<h2>注文情報確認</h2>
+
+<table>
+  <tr>
+    <th>商品名</th>
+    <th>単価(税込)</th>
+    <th>数量</th>
+    <th>小計</th>
+  </tr>
+
+<% @cart_items.each do |cart_item| %>
+
+  <tr>
+    <td>
+      <%= cart_item.item.name %>
+    </td>
+    <td>
+      <%= cart_item.item.price %>
+    </td>
+    <td>
+      <%= cart_item.amount %>
+    </td>
+    <td>
+      <%= cart_item.item.price*cart_item.amount %>
+    </td>
+  </tr>
+
+<% end %>
+
+</table>
+
+<!--送料とかの箱-->
+<div>
+<h2>支払方法</h2>
+  <%= @order.payment_method_i18n %>
+</div>
+
+<div>
+  <h2>お届け先</h2>
+  <div>
+    <%= @postal_code %>
+  </div>
+  <div>
+    <%= @address %>
+  </div>
+</div>
+
+
+<!--  <%# form_withn model: @order_details url:, local:true do |f| %>
+
+ <%# f.hidden_ field 支払方法や届け先、カート内商品を送るやつ　%>
+
+-->
+
+
+

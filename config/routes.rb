@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :cart_items
     resources :customers
     resources :items
+    post 'confirmation' => 'orders#confirmation'
+    get 'thanks' => 'orders#thanks'
   end
 
   scope module: :public do
