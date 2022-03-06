@@ -1,23 +1,30 @@
-  <%= attachment_image_tag @item, :image %>
+<div class="main">
 
-<div>
-    <%= @item.name %>
-</div>
-<div>
-    <%= @item.introduction %>
-</div>
-<div>
-    ￥<%= @item.price %>
-</div>
+  <div class="item-show">
+    <div>
+      <%= attachment_image_tag @item, :image, :fill, 300, 300 %>
+    </div>
+    <div>
+      <div>
+          <h3><%= @item.name %></h3>
+      </div>
+      <div>
+          <p><strong><%= @item.introduction %></strong></p>
+      </div>
+      <div class="item-show-price">
+          <h3>￥<%= @item.price*1.1 %></h3><p>(税込)</p>
+      </div>
 
-<%= form_with model: @cart_item, url: public_cart_items_path, local:true do |f| %>
+      <%= form_with model: @cart_item, url: public_cart_items_path, local:true do |f| %>
 
-  <div>
-    <%= f.hidden_field :item_id, value: @item.id %>
+        <div>
+          <%= f.hidden_field :item_id, value: @item.id %>
 
-    <%= f.select :amount, {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10} %>
+          <%= f.select :amount, {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10} %>
+          <%= f.submit "カートに入れる", class:"btn btn-success" %>
+        </div>
+
+      <% end %>
+    </div>
   </div>
-
-  <%= f.submit "カートに入れる" %>
-
-<% end %>
+</div>

@@ -1,7 +1,7 @@
-<h2>会員一覧</h2>
+<div class="title">会員一覧</div>
 
 <table>
-  <thead>
+  <thead class="table-warning">
     <tr>
       <th>会員ID</th>
       <th>氏名</th>
@@ -13,7 +13,7 @@
     <% @customers.each do |customer| %>
       <tr>
         <td><%= customer.id %></td>
-        <td><%= link_to "customer.name", admin_customer_path(customer.id) %></td>
+        <td><%= link_to customer.last_name, admin_customer_path(customer.id) %><%= link_to customer.first_name, admin_customer_path(customer.id) %></td>
         <td><%= customer.email %></td>
       <% if customer.is_active == true %>
         <td>有効</td>
@@ -23,3 +23,4 @@
       </tr>
     <% end %>
   </tbody>
+</table>

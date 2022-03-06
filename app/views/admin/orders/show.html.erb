@@ -1,22 +1,22 @@
 <h2>注文履歴詳細</h2>
 <div>
   <li>購入者</li>
-  <li><%= order.customer.name %></li>
+  <li><%= @order.customer.last_name %></li>
 </div>
 <div>
   <li>注文日</li>
-  <li><%= order.created_at %></li>
+  <li><%= @order.created_at %></li>
 </div>
 <div>
   <li>配送先</li>
-  <li>〒<%= order.postal_code %><%= order.address %></li>
-  <li><%= order.name %></li>
+  <li>〒<%= @order.postal_code %><%= @order.address %></li>
+  <li><%= @order.name %></li>
 </div>
 <div>
   <li>支払方法</li>
-  <li></li>
+  <li><%= @order.payment_method_i18n %></li>
 </div>
 <div>
   <li>注文ステータス</li>
-  <li></li>
+  <li><%= @order.status %></li>
 </div>

@@ -1,21 +1,36 @@
 <h2>マイページ</h2>
 
-登録情報 <%= link_to 編集する, public_customer_path(customer.id) %>
-<div>
-  <li>氏名</li>
+<div class="customer-item">
+<h2>登録情報 <%= link_to "編集する", edit_public_customers_path %></h2>
+</div>
+<div class="customer-item">
+  <ul>氏名</ul> <ul><%= current_customer.last_name %><%= current_customer.first_name %></ul>
 </div>
 <div>
-  <li>カナ</li>
+  <ul>カナ</ul>
+  <ul><%= current_customer.last_name_kana %><%= current_customer.first_name_kana %></ul>
+</div>
+<div class="customer-item">
+  <ul>郵便番号</ul>
+  <ul><%= current_customer.postal_code %></ul>
+</div>
+<div class="customer-item">
+  <ul>住所</ul>
+  <ul><%= current_customer.address %></ul>
+</div>
+<div class="customer-item">
+  <ul>電話番号</ul>
+  <ul><%= current_customer.telephone_number %></ul>
+</div>
+<div class="customer-item">
+  <ul>メールアドレス</ul>
+  <ul><%= current_customer.email %></ul>
+</div>
+
+
+<div>
+  <h3>配送先</h3><%= link_to "一覧を見る", public_addresses_path %>
 </div>
 <div>
-  <li>郵便番号</li>
-</div>
-<div>
-  <li>住所</li>
-</div>
-<div>
-  <li>電話番号</li>
-</div>
-<div>
-  <li>メールアドレス</li>
+  <h3>注文一覧</h3><%= link_to "一覧を見る", public_orders_path %>
 </div>

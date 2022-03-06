@@ -3,10 +3,12 @@ Rails.application.routes.draw do
     resources :addresses
     resources :orders
     resources :cart_items
-    resources :customers
+    resource :customers
     resources :items
     post 'confirmation' => 'orders#confirmation'
     get 'thanks' => 'orders#thanks'
+    get 'customers/confirmation' => 'customers#confirmation'
+    patch 'customers/withdrawal' => 'customers#withdrawal'
   end
 
   scope module: :public do

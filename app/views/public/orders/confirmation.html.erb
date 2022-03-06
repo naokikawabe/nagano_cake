@@ -46,11 +46,16 @@
 </div>
 
 
-<!--  <%# form_withn model: @order_details url:, local:true do |f| %>
+<%= form_with model: @order, url: public_orders_path, local:true do |f| %>
 
- <%# f.hidden_ field 支払方法や届け先、カート内商品を送るやつ　%>
+  <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+  <%= f.hidden_field :address, :value => @address %>
+  <%= f.hidden_field :postal_code, :value => @postal_code %>
+  <%= f.hidden_field :name, :value => @name %>
+  <%= f.hidden_field :total_payment, => cart_item.item.price*cart_item.amount %>
+  <%= f.hidden_field :state, :value => 0 %>
 
--->
-
+  <%= f.submit"注文を確定する" %>
+<% end %>
 
 

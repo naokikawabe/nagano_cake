@@ -5,15 +5,16 @@
   購入には会員登録が必要です。
 </p>
 
-<div>
+
   <h2>新着商品</h2>
-  <div>
+<div class="item-list-top">
     <% @items.each do |item| %>
-        <div><%= attachment_image_tag item, :image %></div>
+    <div>
+        <div><%= attachment_image_tag item, :image, :fill, 300, 300 %></div>
         <div><%= item.name %></div>
         <div>¥<%= item.price %></div>
+    </div>
     <% end %>
-  </div>
 </div>
 
 <div>

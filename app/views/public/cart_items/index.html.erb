@@ -1,43 +1,58 @@
-<h2>ショッピングカート</h2>
+<div class="title">ショッピングカート</div>
 
-<h3><カートを空にする></h3>
+<div>
+  <%#= link_to %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>商品名</th>
-      <th>単価(税込)</th>
-      <th>数量</th>
-      <th>小計</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @cart_items.each do |cart_item| %>
+<div  class="row">
+  <table class="table table-hover">
+    <thead>
       <tr>
-        <td><%= cart_item.item.name %></td>
-        <td><%= cart_item.item.price %></td>
-        <td><%= cart_item.amount %></td>
-        <td><%= cart_item.item.price %></td>
-        <td>
-          <%= link_to public_cart_item_path(cart_item.id), method: :delete do %>
-            削除する
-          <% end %>
-        </td>
+        <th class="item-name">商品名</th>
+        <th class="item-name">単価(税込)</th>
+        <th class="item-name">数量</th>
+        <th class="item-name">小計</th>
+        <th></th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td class="item-name"><%= attachment_image_tag cart_item.item, :image, :fill, 100, 100 %><%= cart_item.item.name %></td>
+          <td class="item-name"><%= cart_item.item.price*1.1 %></td>
+          <td class="item-name"><%= cart_item.amount %></td>
+          <td class="item-name"><%= cart_item.item.price*cart_item.amount*1.1 %></td>
+          <td class="item-name">
+            <%= link_to public_cart_item_path(cart_item.id), method: :delete do %>
+              削除する
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
 
-    <%= link_to public_items_path do %>
+    </tbody>
+  </table>
+</div>
+
+
+<div>
+    <%= link_to public_items_path, class:"btn btn-primary" do %>
       買い物を続ける
     <% end %>
+</div>
 
-
-    <%= link_to new_public_order_path do %>
+<div>
+    <nav class="item-list">
+      <li class="item-list-item">合計金額</li>
+      <li class="item-list-item"><%= @total %></li>
+    </nav>
+</div>
+<div>
+    <%= link_to new_public_order_path, class:"btn btn-success" do %>
       情報入力に進む
     <% end %>
+</div>
 
 
 
 
-  </tbody>
-</table>

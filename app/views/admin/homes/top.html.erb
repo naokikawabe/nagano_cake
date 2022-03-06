@@ -1,29 +1,28 @@
 <h2>注文履歴一覧</h2>
-<table>
-  <thead>
-    <th>購入日時</th>
-    <th>購入者</th>
-    <th>注文個数</th>
-    <th>注文ステータス</th>
-  </thead>
-  <tbody>
-    <% @orders.each do |order| %>
-      <td><%= order.created_at %></td>
-      <td><%= order.customer.name %></td>
-    <td>
-      <% quantity = 0 %>
-      <% order.order_details.each do |order_detail| %>
-        <% quantity += order_detail.amount %>
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>購入日時</th>
+        <th>購入者</th>
+        <th>注文個数</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @orders.each do |order| %>
+      <tr>
+        <td><%= link_to order.created_at, admin_order_path(order.id) %></td>
+        <td><%= order.customer.last_name+order.customer.first_name %></td>
+        <td>
+          <% quantity = 0 %>
+          <% order.order_details.each do |order_detail| %>
+            <% quantity += order_detail.amount %>
+          <% end %>
+          <%= quantity %>
+        </td>
       <% end %>
-      <%= quantity %>
-    </td>
-      <td>
-      <% if order.is_active %>
-        <td>有効</td>
-      <% else %>
-        <td>退会</td>
-      <% end %>
-      </td>
-    <% end %>
-  </tbody>
-</table>
+    </tr>
+    </tbody>
+  </table>
+</div>

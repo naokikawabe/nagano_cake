@@ -1,34 +1,47 @@
-<h2>商品編集</h2>
+<div class="title">商品編集</div>
 
-<%= form_with model: @item, url: admin_item_path, local:true do |f| %>
-  <div>
-    <h4>商品画像</h4>
-    <%= f.attachment_field :image %>
-  </div>
-  <div>
-    <h4>商品名</h4>
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <h4>商品説明</h4>
-    <%= f.text_field :introduction %>
-  </div>
-  <div>
-    <h4>ジャンル</h4>
-    <%= f.collection_select :genre_id, @genre.all, :id, :name %>
-  </div>
+<div class="item-new">
+  <%= form_with model: @item, url: admin_item_path, local:true do |f| %>
+    <div class="new-item-list">
+      <nav class="new-item">
+        <p class="item">商品画像</p>
+        <%= f.attachment_field :image %>
+      </nav>
+    </div>
+    <div class="new-item-list">
+      <nav class="new-item">
+        <p class="item">商品名</p>
+        <%= f.text_field :name %>
+      </nav>
+    </div>
+    <div class="new-item-list">
+      <nav class="new-item">
+        <p class="item">商品説明</p>
+        <%= f.text_field :introduction %>
+      </nav>
+    </div>
+    <div>
+      <nav class="new-item">
+        <p class="item">ジャンル</p>
+        <%= f.collection_select :genre_id, @genre.all, :id, :name %>
+      </nav>
+    </div>
 
-  <div>
-    <h4>税抜価格</h4>
-    <%= f.text_field :price %>
-  </div>
-  <div>
-  <h4>販売ステータス</h4>
-    <%= f.radio_button :is_active, :TRUE %>
-    <%= f.label :boolean, "販売中" %>
-    <%= f.radio_button :is_active, :FALSE %>
-    <%= f.label :boolean, "販売停止中" %>
-  </div>
+    <div>
+      <nav class="new-item">
+        <p class="item">税抜価格</p>
+        <%= f.text_field :price %>
+    </div>
+    <div>
+      <nav class="new-item">
+        <p class="item">販売ステータス</p>
+          <%= f.radio_button :is_active, :TRUE %>
+          <%= f.label :boolean, "販売中" %>
+          <%= f.radio_button :is_active, :FALSE %>
+          <%= f.label :boolean, "販売停止中" %>
+      </nav>
+    </div>
 
-  <%= f.submit"変更を保存" %>
-<% end %>
+    <%= f.submit"変更を保存", class:"btn btn-success" %>
+  <% end %>
+</div>
