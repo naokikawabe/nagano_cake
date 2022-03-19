@@ -9,16 +9,17 @@
 
 <table class="table table-hover">
   <p>ジャンル</p>
+
   <% @genres.each do |genre| %>
-    <div>
-    　<tr>
+<div class="genres-list">
+    　<div>
     　  <%= genre.name %>
-    　</tr>
-    </div>
+    　</div>
   　<div>
       <%= link_to edit_admin_genre_path(genre.id), class:"btn btn-success" do %>
          編集する
       <% end %>
   　</div>
+</div>
   <% end %>
 </table>

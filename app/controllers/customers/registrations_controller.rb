@@ -23,6 +23,9 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   # def update
   #   super
   # end
+  def after_sign_up_path_for(resource)
+    public_customers_path
+  end
 
   # DELETE /resource
   # def destroy

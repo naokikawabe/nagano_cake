@@ -1,47 +1,65 @@
-<h2>注文情報確認</h2>
+<div class="title">注文情報確認</div>
+<div class="order-confirmation-list">
+  <table class="table table-hover">
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
 
-<table>
-  <tr>
-    <th>商品名</th>
-    <th>単価(税込)</th>
-    <th>数量</th>
-    <th>小計</th>
-  </tr>
+  <% @cart_items.each do |cart_item| %>
 
-<% @cart_items.each do |cart_item| %>
+    <tr>
+      <td>
+        <%= attachment_image_tag cart_item.item, :image, :fill, 100, 100 %>
+        <%= cart_item.item.name %>
+      </td>
+      <td>
+        <%= (cart_item.item.price*1.1).round %>円
+      </td>
+      <td>
+        <%= cart_item.amount %>
+      </td>
+      <td>
+        <%= (cart_item.item.price*cart_item.amount*1.1).round %>円
+      </td>
+    </tr>
 
-  <tr>
-    <td>
-      <%= cart_item.item.name %>
-    </td>
-    <td>
-      <%= cart_item.item.price %>
-    </td>
-    <td>
-      <%= cart_item.amount %>
-    </td>
-    <td>
-      <%= cart_item.item.price*cart_item.amount %>
-    </td>
-  </tr>
+  <% end %>
 
-<% end %>
+  </table>
 
-</table>
-
-<!--送料とかの箱-->
-<div>
-<h2>支払方法</h2>
+  <table class="table table-hover">
+    <tr>
+      <th>送料</th>
+      <td><%= @shipping_cost %>円</td>
+    </tr>
+    <tr>
+      <th>商品合計</th>
+      <td><%= (@total*1.1).round %>円</td>
+    </tr>
+    <tr>
+      <th>請求金額</th>
+      <td><%= (@shipping_cost+@total*1.1).round %>円</td>
+    </tr>
+  </table>
+</div>
+<div class="order-confirmation-payment_method">
+<p><strong>支払方法</strong></p>
   <%= @order.payment_method_i18n %>
 </div>
 
-<div>
-  <h2>お届け先</h2>
+<div class="order-confirmation-address">
+  <p><strong>お届け先</strong></p>
   <div>
     <%= @postal_code %>
   </div>
   <div>
     <%= @address %>
+  </div>
+  <div>
+    <%= @name %>
   </div>
 </div>
 
@@ -52,11 +70,12 @@
   <%= f.hidden_field :address, :value => @address %>
   <%= f.hidden_field :postal_code, :value => @postal_code %>
   <%= f.hidden_field :name, :value => @name %>
-  <%= f.hidden_field :total_payment, => cart_item.item.price*cart_item.amount %>
-  <%= f.hidden_field :state, :value => 0 %>
+  <%= f.hidden_field :total_payment, :value => @total %>
+  <%#= f.hidden_field :status, :value => 0 %>
 
-
-  <%= f.submit"注文を確定する" %>
+ <div class="order-confirmation-btn">
+  <%= f.submit"注文を確定する", class:"btn btn-success" %>
+ </div>
 <% end %>
 
 

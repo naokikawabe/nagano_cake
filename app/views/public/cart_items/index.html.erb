@@ -1,11 +1,11 @@
 <div class="title">ショッピングカート</div>
 
 <div>
-  <%#= link_to %>
+  <%= link_to "カートを空にする", public_cart_item_destroy_all_path, method: :delete, class:"btn btn-success" %>
 </div>
 
-<div  class="row">
-  <table class="table table-hover">
+<div>
+  <table class="cart_item-table">
     <thead>
       <tr>
         <th class="item-name">商品名</th>
@@ -19,9 +19,15 @@
       <% @cart_items.each do |cart_item| %>
         <tr>
           <td class="item-name"><%= attachment_image_tag cart_item.item, :image, :fill, 100, 100 %><%= cart_item.item.name %></td>
-          <td class="item-name"><%= cart_item.item.price*1.1 %></td>
-          <td class="item-name"><%= cart_item.amount %></td>
-          <td class="item-name"><%= cart_item.item.price*cart_item.amount*1.1 %></td>
+          <td class="item-name"><%= (cart_item.item.price*1.1).round %>円</td>
+          <td class="item-name">
+            <%= form_with model: cart_item, url: public_cart_item_path(cart_item.id), local:true, method: :patch do |f| %>
+              <%= f.number_field :amount %>
+              <%= f.hidden_field :item_id, :value => cart_item.item_id %>
+            <%= f.submit "更新" %>
+            <% end %>
+          </td>
+          <td class="item-name"><%= (cart_item.item.price*cart_item.amount*1.1).round %>円</td>
           <td class="item-name">
             <%= link_to public_cart_item_path(cart_item.id), method: :delete do %>
               削除する
@@ -36,19 +42,18 @@
 
 
 <div>
-    <%= link_to public_items_path, class:"btn btn-primary" do %>
+  <nav class="item-list">
+    <%= link_to root_path, class:"btn btn-primary" do %>
       買い物を続ける
     <% end %>
+    <div class= "item-price">
+      <div class="item-list-item">合計金額</div>
+      <div class="item-list-item"><%= (@total*1.1).round %>円</div>
+    </div>
+  </nav>
 </div>
-
-<div>
-    <nav class="item-list">
-      <li class="item-list-item">合計金額</li>
-      <li class="item-list-item"><%= @total %></li>
-    </nav>
-</div>
-<div>
-    <%= link_to new_public_order_path, class:"btn btn-success" do %>
+<div class= "cart_item-index-btn">
+      <%= link_to new_public_order_path, class:"btn btn-success" do %>
       情報入力に進む
     <% end %>
 </div>

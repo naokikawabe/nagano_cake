@@ -1,10 +1,16 @@
 class Public::OrdersController < ApplicationController
   def new
-    @order = Order.new
-    @address = current_customer.address
+    @cart_item = current_customer.cart_items
+    if @cart_item.count != 0
+      @order = Order.new
+      @address = current_customer.address
+    else
+      redirect_to public_cart_items_path
+    end
   end
 
   def confirmation
+    @shipping_cost = 800
     @order = Order.new(order_params)
     @cart_items = current_customer.cart_items
     @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
@@ -29,7 +35,8 @@ class Public::OrdersController < ApplicationController
     order = Order.new(order_params)
     @cart_items = current_customer.cart_items
     order.customer_id = current_customer.id
-    if order.save
+    order.status = 0
+    order.save
       @cart_items.each do |cart_item|
         order_detail = OrderDetail.new
         order_detail.order_id = order.id
@@ -39,10 +46,8 @@ class Public::OrdersController < ApplicationController
         order_detail.making_status = 0
         order_detail.save
       end
-        @cart_items.destroy_all
-        redirect_to public_thanks_path
-    end
-
+    @cart_items.destroy_all
+    redirect_to public_thanks_path
   end
 
   def thanks
@@ -50,17 +55,21 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.orders
+    @shipping_cost = 800
   end
 
   def show
+    @cart_items = current_customer.cart_items
+    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
     @order = Order.find(params[:id])
+    @shipping_cost = 800
   end
 
 
   private
 
   def order_params
-    params.require(:order).permit(:name, :address, :postal_code, :payment_method)
+    params.require(:order).permit(:name, :address, :postal_code, :payment_method, :total_payment)
   end
 
 end

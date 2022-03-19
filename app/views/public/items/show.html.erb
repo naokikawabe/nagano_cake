@@ -12,7 +12,7 @@
           <p><strong><%= @item.introduction %></strong></p>
       </div>
       <div class="item-show-price">
-          <h3>￥<%= @item.price*1.1 %></h3><p>(税込)</p>
+          <h3>￥<%= (@item.price*1.1).round %></h3><p>(税込)</p>
       </div>
 
       <%= form_with model: @cart_item, url: public_cart_items_path, local:true do |f| %>

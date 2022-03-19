@@ -21,7 +21,7 @@
             <%= order_detail.item.name %>
           <% end %>
         </td>
-        <td><%= order.total_payment %></td>
+        <td><%= (@shipping_cost+order.total_payment*1.1).round %></td>
         <td><%= order.status_i18n %></td>
         <td><%= link_to "表示する", public_order_path(order.id) %></td>
       </tr>

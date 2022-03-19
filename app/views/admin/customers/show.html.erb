@@ -30,7 +30,7 @@
 </div>
 <div class="customer-list">
   <li class="customer-list-item">会員ステータス</li>
-  <% if @customer.is_active %>
+  <% if @customer.is_active == true %>
       <li class="customer-list-item">有効</li>
     <% else %>
       <li class="customer-list-item">退会</li>

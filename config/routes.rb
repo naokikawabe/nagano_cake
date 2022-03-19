@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+
+  devise_for :admins, controllers: {
+  sessions:      'admins/sessions'
+  # passwords:     'admins/passwords',
+  # registrations: 'admins/registrations'
+}
+devise_for :customers, controllers: {
+  sessions:      'customers/sessions',
+  # passwords:     'customers/passwords',
+  registrations: 'customers/registrations'
+}
+
+
   namespace :public do
     resources :addresses
     resources :orders
@@ -9,6 +22,7 @@ Rails.application.routes.draw do
     get 'thanks' => 'orders#thanks'
     get 'customers/confirmation' => 'customers#confirmation'
     patch 'customers/withdrawal' => 'customers#withdrawal'
+    delete 'cart_item/destroy_all' => 'cart_items#destroy_all'
   end
 
   scope module: :public do
@@ -16,24 +30,14 @@ Rails.application.routes.draw do
     get 'homes/about'
   end
 
-devise_for :admins, controllers: {
-  sessions:      'admins/sessions',
-  passwords:     'admins/passwords',
-  registrations: 'admins/registrations'
-}
-devise_for :customers, controllers: {
-  sessions:      'customers/sessions',
-  passwords:     'customers/passwords',
-  registrations: 'customers/registrations'
-}
 
   namespace :admin do
     resources :orders
     resources :customers
     resources :genres
     resources :items
-    get '/top' => 'homes#top'
-
+    get '/' => 'homes#top'
+    resources :order_details, only: [:update]
   end
 
 end

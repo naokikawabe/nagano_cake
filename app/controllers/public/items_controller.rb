@@ -1,6 +1,7 @@
 class Public::ItemsController < ApplicationController
   def index
     @items = Item.all
+    @tax = 1.1
   end
 
   def show
